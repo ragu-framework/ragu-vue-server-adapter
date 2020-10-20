@@ -1,10 +1,10 @@
 {
   "name": "ragu-vue-server-adapter",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "Server of ragu micro-frontend framework",
   "main": "./index.js",
   "type": "./index.d.ts",
-  "repository": "https://github.com/carlosmaniero/ragu",
+  "repository": "https://github.com/ragu-framework/ragu-vue-server-adapter",
   "author": "Maniero <carlosmaniero@gmail.com>",
   "license": "MIT",
   "dependencies": {
