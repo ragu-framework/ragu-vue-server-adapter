@@ -1,11 +1,12 @@
 import webpack from "webpack";
 import path from 'path';
+import {RaguServerConfig} from "ragu-server";
 
 const {VueLoaderPlugin} = require("vue-loader");
 
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 
-export const raguVueWebpackBaseConfig = (assetsPrefix: string, developmentEnvironment: boolean = false): webpack.Configuration => {
+export const raguVueWebpackBaseConfig = (config: RaguServerConfig): webpack.Configuration => {
   return {
     mode: 'production',
     resolve: {
@@ -40,33 +41,33 @@ export const raguVueWebpackBaseConfig = (assetsPrefix: string, developmentEnviro
           loader: 'file-loader',
           options: {
             esModule: false,
-            publicPath: assetsPrefix
+            publicPath: config.compiler.assetsPrefix
           },
         },
         {
           test: /\.css$/,
           exclude: /node_modules/,
           use: [
-            developmentEnvironment ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: developmentEnvironment } },
+            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
+            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
           ],
         },
         {
           test: /\.scss$/,
           exclude: /node_modules/,
           use: [
-            developmentEnvironment ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: developmentEnvironment } },
-            { loader: 'sass-loader', options: { sourceMap: developmentEnvironment } }
+            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
+            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
+            { loader: 'sass-loader', options: { sourceMap: config.environment === 'development' } }
           ]
         },
         {
           test: /\.sass$/,
           exclude: /node_modules/,
           use: [
-            developmentEnvironment ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: developmentEnvironment } },
-            { loader: 'sass-loader', options: { sourceMap: developmentEnvironment } }
+            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
+            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
+            { loader: 'sass-loader', options: { sourceMap: config.environment === 'development' } }
           ]
         }
       ]

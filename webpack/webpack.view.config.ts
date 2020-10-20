@@ -1,19 +1,6 @@
 import {raguVueWebpackBaseConfig} from "./webpack.base.config";
+import {RaguServerConfig} from "ragu-server";
 
 const {merge} = require("webpack-merge");
-const nodeExternals = require('webpack-node-externals');
 
-export const raguVueWebpackViewConfig = (assetsPrefix: string, developmentEnvironment: boolean = false) => merge(raguVueWebpackBaseConfig(assetsPrefix, developmentEnvironment), {
-  target: 'node',
-
-  devtool: 'source-map',
-
-  output: {
-    libraryTarget: 'commonjs2',
-    filename: '[name].js',
-  },
-
-  externals: nodeExternals({
-    allowlist: /\.css$/
-  }),
-});
+export const raguVueWebpackViewConfig = (config: RaguServerConfig) => merge(raguVueWebpackBaseConfig(config), {});

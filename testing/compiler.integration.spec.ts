@@ -58,6 +58,7 @@ describe('Compiler Integration Test', () => {
       dom = new jsdom.JSDOM(undefined, options);
 
       (global as any).window = dom.window;
+      (global as any).btoa = dom.window.btoa;
       (global as any).document = dom.window.document;
     });
 

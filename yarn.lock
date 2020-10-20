@@ -6446,6 +6446,11 @@ is-plain-object@^2.0.3, is-plain-object@^2.0.4:
   dependencies:
     isobject "^3.0.1"
 
+is-plain-object@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-5.0.0.tgz#4427f50ab3429e9025ea7d52e9043a9ef4159344"
+  integrity sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==
+
 is-potential-custom-element-name@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-potential-custom-element-name/-/is-potential-custom-element-name-1.0.0.tgz#0c52e54bcca391bb2c494b21e8626d7336c6e397"
@@ -9507,15 +9512,17 @@ ragu-dom@^0.0.22:
   resolved "https://registry.yarnpkg.com/ragu-dom/-/ragu-dom-0.0.22.tgz#8d40bc812b22c69cfc7ae6826b8eba138c222b0b"
   integrity sha512-HBBmMnqt1/OrKsVaYRbtc97C4Z+o3ZkD90eafb7zniBeyhVypdAOgvncZyIRGprA8VS+3jDAzcDNeV1UFlYtMg==
 
-ragu-server@^0.0.27:
-  version "0.0.27"
-  resolved "https://registry.yarnpkg.com/ragu-server/-/ragu-server-0.0.27.tgz#ce563ae7820bfda2dbea665b4153379063a7d02c"
-  integrity sha512-7c+cJPhCwgWuv7/AzYNSkcOeQgdtKXo7gqpW+3DzOe1QwZFGgx12NT1HHcxDu4R4Vxwl/eUqLYI/G03CtxRR/A==
+ragu-server@^0.0.35:
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/ragu-server/-/ragu-server-0.0.35.tgz#4b3a662725763264429d2632d17a46dd4d230370"
+  integrity sha512-PTBXh8S/EHH7udHpwGqVasz0/rOUFC3KcwSlm9vB8qnxUK3Mg0OYQxX8hGXIK8CYjdaFuhT8AeCulkCcRlNL+Q==
   dependencies:
     "@types/webpack-node-externals" "^2.5.0"
     chalk "^4.1.0"
     chunks-2-json-webpack-plugin "^1.0.4"
+    deepmerge "^4.2.2"
     express "^4.17.1"
+    is-plain-object "^5.0.0"
     npm-programmatic "^0.0.12"
     ragu-dom "^0.0.22"
     webpack "^4.44.1"
