@@ -1,47 +1,26 @@
-import {RaguServerConfig, TemplateComponentResolver} from "ragu-server";
+import {RaguServerConfig, StateComponentResolver} from "ragu-server";
 import * as path from 'path';
 import * as fs from 'fs';
 
-export class VueComponentResolver extends TemplateComponentResolver {
+export class VueComponentResolver extends StateComponentResolver {
+  hydrateResolver: string = path.join(__dirname, 'resolvers', 'hydrate-resolver');
+  stateResolver: string = path.join(__dirname, 'resolvers', 'state-resolver');
+  viewResolver: string = path.join(__dirname, 'resolvers', 'view-resolver');
+
+  stateFileFor(componentName: string): string {
+    return path.join(this.viewFileFor(componentName), 'state');
+  }
+
+  viewFileFor(componentName: string): string {
+    return path.join(this.config.components.sourceRoot, componentName);
+  }
+
+  hydrateFileFor(componentName: string): string {
+    return this.viewFileFor(componentName);
+  }
+
   constructor(config: RaguServerConfig) {
     super(config);
-  }
-
-  async hydrateTemplateFor(componentName: string): Promise<string> {
-    const componentPath = path.join(this.config.components.sourceRoot, componentName);
-
-    return `
-module.exports.default = {
-  async hydrate(el, props, state) {
-    this.app = await require('${componentPath}').default(props, state);
-
-    this.app.$mount(el.firstChild);
-  },
-  disconnect() {
-    this.app.$destroy(true);
-  }
-}
-`;
-  }
-
-  async viewTemplateFor(componentName: string): Promise<string> {
-    const componentPath = path.join(this.config.components.sourceRoot, componentName);
-
-    return `const vueServerRenderer = require("vue-server-renderer");
-
-module.exports.default = {
-  async render(props) {
-    const state = ${await this.stateTemplate(componentPath)};
-    const app = await require('${componentPath}').default(props, state);
-    const renderer = vueServerRenderer.createRenderer();
-
-    return {
-      state: state,
-      html: await renderer.renderToString(app)
-    }
-  }
-}    
-`;
   }
 
   async stateTemplate(componentPath: string) {
