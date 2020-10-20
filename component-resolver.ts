@@ -13,7 +13,7 @@ export class VueComponentResolver extends TemplateComponentResolver {
     return `
 module.exports.default = {
   async hydrate(el, props, state) {
-    this.app = await require('${componentPath}').default.render(props, state);
+    this.app = await require('${componentPath}').default(props, state);
 
     this.app.$mount(el.firstChild);
   },
@@ -32,7 +32,7 @@ module.exports.default = {
 module.exports.default = {
   async render(props) {
     const state = ${await this.stateTemplate(componentPath)};
-    const app = await require('${componentPath}').default.render(props, state);
+    const app = await require('${componentPath}').default(props, state);
     const renderer = vueServerRenderer.createRenderer();
 
     return {
@@ -58,6 +58,6 @@ module.exports.default = {
       return 'null';
     }
 
-    return `await require('${statePath}').default.propsToState(props)`
+    return `await require('${statePath}').default(props)`
   }
 }
