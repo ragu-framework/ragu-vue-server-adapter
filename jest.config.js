@@ -5,5 +5,6 @@ module.exports = {
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "/testing/",
+    "/webpack/",
   ]
 };
