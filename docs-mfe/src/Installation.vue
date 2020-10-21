@@ -1,6 +1,8 @@
 <template>
   <div class="installation">
-    <img alt="Vue logo" v-bind:src="logo">
+    <div class="logo">
+      <img alt="Vue logo" v-bind:src="logo">
+    </div>
 
     <h1>Welcome to ragu-vue-server-adapter documentation!</h1>
 
@@ -187,5 +189,13 @@ h2 {
 
 a {
   color: #BF265E;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo img {
+  max-width: 90%;
 }
 </style>
