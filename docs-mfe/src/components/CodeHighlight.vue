@@ -22,5 +22,6 @@ export default {
     max-width: 100%;
     border-radius: 10px;
     white-space: nowrap;
+    font-size: 1.2rem;
   }
 </style>
