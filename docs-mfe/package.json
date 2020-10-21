@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "prismjs": "^1.22.0",
     "ragu-server": "^0.0.35",
     "ragu-vue-server-adapter": "^0.0.37",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-prismjs": "^1.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
