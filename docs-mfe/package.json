@@ -1,0 +1,48 @@
+{
+  "name": "docs-mfe",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "ASSETS_PREFIX=https://ragu-vue-server-adapter.herokuapp.com/component-assets/ yarn ragu:start",
+    "build": "ASSETS_PREFIX=https://ragu-vue-server-adapter.herokuapp.com/component-assets/ yarn ragu:build",
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "ragu:build": "ragu-server build ragu-config.js",
+    "ragu:start": "ragu-server run ragu-config.js",
+    "ragu:dev": "ragu-server dev ragu-config.js"
+  },
+  "dependencies": {
+    "core-js": "^3.6.5",
+    "ragu-server": "^0.0.35",
+    "ragu-vue-server-adapter": "^0.0.37",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
