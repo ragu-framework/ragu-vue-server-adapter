@@ -1,9 +1,14 @@
 module.exports = (component) => ({
   hydrate: function (el, props, state) {
-    this.app = component(props, state);
-    this.app.$mount(el.firstChild);
+    el.app = component(props, state);
+    el.app.$mount(el, true);
   },
-  disconnect: function () {
-    this.app.$destroy(true);
+  render: function (el, props, state) {
+    el.app = component(props, state);
+    var renderedComponent = el.app.$mount();
+    el.appendChild(renderedComponent.$el);
+  },
+  disconnect: function (el) {
+    el.app.$destroy(true);
   }
 });

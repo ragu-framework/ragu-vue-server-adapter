@@ -74,9 +74,19 @@ describe('Compiler Integration Test', () => {
       const resolvedComponent = (window as any)['test_components_hello-world'].default;
       const div = dom.window.document.createElement('div');
 
-      div.innerHTML = '<div></div>'; // Simulate the SSR content;
-
       await resolvedComponent.hydrate(div, {name: 'Hello, World'});
+
+      expect(div.textContent).toContain('Hello, World');
+      expect(div.textContent).toContain('For a guide and recipes on how to configure / customize this project');
+    });
+
+    it('renders the component', async () => {
+      await evalCompiledClient('hello-world');
+
+      const resolvedComponent = (window as any)['test_components_hello-world'].default;
+      const div = dom.window.document.createElement('div');
+
+      await resolvedComponent.render(div, {name: 'Hello, World'});
 
       expect(div.textContent).toContain('Hello, World');
       expect(div.textContent).toContain('For a guide and recipes on how to configure / customize this project');
@@ -87,8 +97,6 @@ describe('Compiler Integration Test', () => {
 
       const resolvedComponent = (window as any)['test_components_hello-world-state'].default;
       const div = dom.window.document.createElement('div');
-
-      div.innerHTML = '<div></div>'; // Simulate the SSR content;
 
       await resolvedComponent.hydrate(div, {name: 'World'}, {msg: 'Hello, World'});
 
@@ -102,13 +110,27 @@ describe('Compiler Integration Test', () => {
       const resolvedComponent = (window as any)['test_components_hello-world'].default;
       const div = dom.window.document.createElement('div');
 
-      div.innerHTML = '<div></div>'; // Simulate the SSR content;
-
       await resolvedComponent.hydrate(div, {name: 'Hello, World'});
 
       // @ts-ignore
       window.stubVueDestroyed = jest.fn();
-      resolvedComponent.disconnect();
+      resolvedComponent.disconnect(div);
+
+      // @ts-ignore
+      expect(window.stubVueDestroyed).toBeCalled();
+    });
+
+    it('destroys component by renders', async () => {
+      await evalCompiledClient('hello-world');
+
+      const resolvedComponent = (window as any)['test_components_hello-world'].default;
+      const div = dom.window.document.createElement('div');
+
+      await resolvedComponent.render(div, {name: 'Hello, World'});
+
+      // @ts-ignore
+      window.stubVueDestroyed = jest.fn();
+      resolvedComponent.disconnect(div);
 
       // @ts-ignore
       expect(window.stubVueDestroyed).toBeCalled();
