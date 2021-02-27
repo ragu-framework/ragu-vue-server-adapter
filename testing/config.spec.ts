@@ -2,7 +2,7 @@ import {createVueRaguServerConfig} from "../config";
 
 describe('Config', () => {
   it('does not set a default resolver when one was given', () => {
-    const resolver = jest.fn();
+    const resolver: any = jest.fn();
 
     const config = createVueRaguServerConfig({
       components: {
@@ -18,7 +18,7 @@ describe('Config', () => {
   });
 
   it('does not set a default webpack view config when one was given', () => {
-    const webpackView = {};
+    const webpackView: any = {};
 
     const config = createVueRaguServerConfig({
       components: {
@@ -27,12 +27,12 @@ describe('Config', () => {
       compiler: {
         assetsPrefix: '/',
         webpack: {
-          view: webpackView
+          serverSide: webpackView
         }
       }
     });
 
-    expect(config.compiler.webpack.view).toBe(webpackView);
+    expect(config.compiler.webpack.serverSide).toBe(webpackView);
   });
 
   it('does not set a default webpack hydrate config when one was given', () => {
@@ -46,11 +46,11 @@ describe('Config', () => {
       compiler: {
         assetsPrefix: '/',
         webpack: {
-          hydrate: webpackHydrate
+          clientSide: webpackHydrate
         }
       }
     });
 
-    expect(config.compiler.webpack.hydrate).toBe(webpackHydrate);
+    expect(config.compiler.webpack.clientSide).toBe(webpackHydrate);
   });
 });
