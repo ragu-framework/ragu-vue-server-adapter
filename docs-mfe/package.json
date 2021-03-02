@@ -17,7 +17,7 @@
     "core-js": "^3.6.5",
     "prismjs": "^1.22.0",
     "ragu-server": "^0.0.56",
-    "ragu-vue-server-adapter": "^0.0.58",
+    "ragu-vue-server-adapter": "^0.0.59",
     "vue": "^2.6.11",
     "vue-prismjs": "^1.2.0"
   },
