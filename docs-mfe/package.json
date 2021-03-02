@@ -9,13 +9,15 @@
     "lint": "vue-cli-service lint",
     "ragu:build": "ragu-server build ragu-config.js",
     "ragu:start": "ragu-server run ragu-config.js",
-    "ragu:dev": "ragu-server dev ragu-config.js"
+    "ragu:dev": "ragu-server dev ragu-config.js",
+    "dev:mfe": "ragu-cli dev --file ragu-components/installation/index.js --dependencies dependencies.json --port 3001",
+    "build:mfe": "ragu-cli static --file ragu-components/installation/index.js --baseurl https://ragu-framework.github.io/ragu-vue-server-adapter --dependencies dependencies.json"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "prismjs": "^1.22.0",
     "ragu-server": "^0.0.55",
-    "ragu-vue-server-adapter": "^0.0.57",
+    "ragu-vue-server-adapter": "^0.0.58",
     "vue": "^2.6.11",
     "vue-prismjs": "^1.2.0"
   },
@@ -26,6 +28,7 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "ragu-cli": "^0.0.11",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
