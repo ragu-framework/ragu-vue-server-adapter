@@ -1,6 +1,6 @@
 {
   "name": "ragu-vue-server-adapter",
-  "version": "0.0.60",
+  "version": "0.0.61",
   "description": "Server of ragu micro-frontend framework",
   "main": "./index.js",
   "type": "./index.d.ts",
@@ -33,7 +33,7 @@
     "node-sass": "~5.0.0",
     "optimize-css-assets-webpack-plugin": "~5.0.4",
     "ragu-dom": "^0.0.63",
-    "ragu-server": "^0.0.63",
+    "ragu-server": "^0.0.64",
     "sass-loader": "~11.0.1",
     "style-loader": "^2.0.0",
     "uglifyjs-webpack-plugin": "~2.2.0",
