@@ -1,9 +1,19 @@
 import webpack from "webpack";
 import {RaguServerConfig} from "ragu-server";
+
 const VueCliService = require("@vue/cli-service/lib/Service");
 
 function isRequiredPlugin(plugin: any) {
-  return plugin.constructor.name === 'VueLoaderPlugin' || plugin.constructor.name === 'MiniCSSExtractPlugin';
+  const requiredPlugins = [
+    'VueLoaderPlugin',
+    'CaseSensitivePathsPlugin',
+    'MiniCssExtractPlugin',
+    'OptimizeCssnanoPlugin',
+    'HashedModuleIdsPlugin',
+    'CopyPlugin',
+  ];
+
+  return requiredPlugins.includes(plugin.constructor.name);
 }
 
 function deleteWebpackConfigManagedByRagu(resolveWebpackConfig: any) {
@@ -11,6 +21,7 @@ function deleteWebpackConfigManagedByRagu(resolveWebpackConfig: any) {
   delete resolveWebpackConfig.output;
   delete resolveWebpackConfig.context;
   delete resolveWebpackConfig.entry;
+  delete resolveWebpackConfig.optimization?.splitChunks;
 }
 
 function configureVueLoaderForSSR(resolveWebpackConfig: any) {
@@ -28,6 +39,31 @@ function configureVueLoaderForSSR(resolveWebpackConfig: any) {
   };
 }
 
+
+function handleStaticFiles(resolveWebpackConfig: any, config: RaguServerConfig) {
+  const staticFilesFormats = [
+    'file.png',
+    'file.svg',
+    'file.mp3',
+    'file.ttf'
+  ]
+
+  const isLoaderFromStaticFiles = (regex: RegExp) =>
+      staticFilesFormats.find((file) => regex.test(file))
+
+  const allLoaders = resolveWebpackConfig.module.rules
+      .filter((rule: any) => {
+        return isLoaderFromStaticFiles(new RegExp(rule?.test));
+      });
+
+  allLoaders?.forEach((imagesLoader: any) => {
+    imagesLoader?.use?.forEach((loader: any) => {
+      loader.options = loader.options || {};
+      loader.options.publicPath = config.compiler.assetsPrefix;
+    })
+  });
+}
+
 // @ts-ignore
 export const raguVueWebpackBaseConfig = (config: RaguServerConfig): webpack.Configuration => {
   process.env.VUE_CLI_MODE = 'production';
@@ -42,6 +78,7 @@ export const raguVueWebpackBaseConfig = (config: RaguServerConfig): webpack.Conf
 
   deleteWebpackConfigManagedByRagu(resolveWebpackConfig);
   configureVueLoaderForSSR(resolveWebpackConfig);
+  handleStaticFiles(resolveWebpackConfig, config);
 
   return resolveWebpackConfig;
 }
