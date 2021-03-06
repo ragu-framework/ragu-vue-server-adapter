@@ -1,7 +1,7 @@
 module.exports = (component) => ({
   hydrate: function (el, props, state) {
     el.app = component(props, state);
-    el.app.$mount(el, true);
+    el.app.$mount(el.querySelector('[data-server-rendered]'));
   },
   render: function (el, props, state) {
     el.app = component(props, state);

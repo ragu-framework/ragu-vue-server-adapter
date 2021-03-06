@@ -1,4 +1,4 @@
-import {ClientSideCompiler, RaguServerConfig, ServerSideCompiler} from "ragu-server";
+import {ComponentsCompiler, RaguServerConfig, ServerSideCompiler} from "ragu-server";
 import {createTestConfig} from "./test-config-factory";
 import {VueComponentResolver} from "../component-resolver";
 import jsdom, {ConstructorOptions} from "jsdom";
@@ -36,7 +36,7 @@ describe('Compiler Integration Test', () => {
   });
 
   describe('Hydrate Compilation', () => {
-    let compiler: ClientSideCompiler;
+    let compiler: ComponentsCompiler;
     let config: RaguServerConfig;
     let dom: jsdom.JSDOM;
 
@@ -45,7 +45,7 @@ describe('Compiler Integration Test', () => {
       config = await createTestConfig();
       config.components.resolver = new VueComponentResolver(config);
 
-      compiler = new ClientSideCompiler(config);
+      compiler = new ComponentsCompiler(config);
       await compiler.compileAll();
     });
 
@@ -68,16 +68,25 @@ describe('Compiler Integration Test', () => {
       eval(client);
     }
 
-    it('exports compiled component into window', async () => {
+    it('hydrate compiled component into window', async () => {
       await evalCompiledClient('hello-world');
 
       const resolvedComponent = (window as any)['test_components_hello-world'].default;
       const div = dom.window.document.createElement('div');
 
+      const {default: compiledComponent} = require(compiler.compiledViewComponentPath('hello-world'));
+      const renderResult = await compiledComponent.render({name: 'Hello, World!'});
+
+      div.innerHTML = renderResult.html;
+      dom.window.document.body.appendChild(div);
+      console.log(dom.window.document.body.innerHTML)
+
       await resolvedComponent.hydrate(div, {name: 'Hello, World'});
 
+      console.log(dom.window.document.body.innerHTML)
       expect(div.textContent).toContain('Hello, World');
       expect(div.textContent).toContain('For a guide and recipes on how to configure / customize this project');
+      expect(div.querySelector('[data-server-rendered]')).toBeNull();
     });
 
     it('renders the component', async () => {
