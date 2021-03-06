@@ -1,80 +1,47 @@
 import webpack from "webpack";
-import path from 'path';
 import {RaguServerConfig} from "ragu-server";
+const VueCliService = require("@vue/cli-service/lib/Service");
 
-const {VueLoaderPlugin} = require("vue-loader");
+function isRequiredPlugin(plugin: any) {
+  return plugin.constructor.name === 'VueLoaderPlugin' || plugin.constructor.name === 'MiniCSSExtractPlugin';
+}
 
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
+function deleteWebpackConfigManagedByRagu(resolveWebpackConfig: any) {
+  delete resolveWebpackConfig.node;
+  delete resolveWebpackConfig.output;
+  delete resolveWebpackConfig.context;
+  delete resolveWebpackConfig.entry;
+}
 
+function configureVueLoaderForSSR(resolveWebpackConfig: any) {
+  resolveWebpackConfig.plugins = resolveWebpackConfig.plugins
+      .filter((plugin: any) => isRequiredPlugin(plugin));
+
+  const vueRule = resolveWebpackConfig.module.rules
+      .find((rule: any) => rule.test.test('file.vue'));
+
+  const vueLoader = vueRule?.use?.find((loader: any) => /vue-loader/.test(loader.loader));
+
+  vueLoader.options = {
+    optimizeSSR: true,
+    extractCSS: true
+  };
+}
+
+// @ts-ignore
 export const raguVueWebpackBaseConfig = (config: RaguServerConfig): webpack.Configuration => {
-  return {
-    mode: 'production',
-    resolve: {
-      modules: ['node_modules', path.resolve(__dirname, '..', 'node_modules')],
-      extensions: [ '.js', '.vue', '.ts' ],
-      alias: {
-        'vue$': 'vue/dist/vue.runtime.min.js',
-      }
-    },
-    resolveLoader: {
-      modules: ['node_modules', path.resolve(__dirname, '..', 'node_modules')],
-    },
-    module: {
-      rules: [
-        {
-          test: /\.vue$/,
-          loader: 'vue-loader',
-          exclude: /node_modules/,
-          options: {
-            optimizeSSR: true,
-            extractCSS: true
-          }
-        },
-        {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-        },
-        {
-          test: /\.(png|svg|jpg|gif)$/,
-          exclude: /node_modules/,
-          loader: 'file-loader',
-          options: {
-            esModule: false,
-            publicPath: config.compiler.assetsPrefix
-          },
-        },
-        {
-          test: /\.css$/,
-          exclude: /node_modules/,
-          use: [
-            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
-          ],
-        },
-        {
-          test: /\.scss$/,
-          exclude: /node_modules/,
-          use: [
-            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
-            { loader: 'sass-loader', options: { sourceMap: config.environment === 'development' } }
-          ]
-        },
-        {
-          test: /\.sass$/,
-          exclude: /node_modules/,
-          use: [
-            config.environment === 'development' ? 'vue-style-loader' : MiniCSSExtractPlugin.loader,
-            { loader: 'css-loader', options: { sourceMap: config.environment === 'development' } },
-            { loader: 'sass-loader', options: { sourceMap: config.environment === 'development' } }
-          ]
-        }
-      ]
-    },
-    plugins: [
-      new VueLoaderPlugin(),
-      new MiniCSSExtractPlugin(),
-    ]
-  }
+  process.env.VUE_CLI_MODE = 'production';
+
+  const vueCliService = new VueCliService(config.projectRoot || process.cwd());
+  vueCliService.init('production');
+
+  const chainableWebpackConfig = vueCliService.resolveChainableWebpackConfig()
+      .mode('production');
+
+  const resolveWebpackConfig = vueCliService.resolveWebpackConfig(chainableWebpackConfig);
+
+  deleteWebpackConfigManagedByRagu(resolveWebpackConfig);
+  configureVueLoaderForSSR(resolveWebpackConfig);
+
+  return resolveWebpackConfig;
 }

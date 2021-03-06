@@ -79,11 +79,9 @@ describe('Compiler Integration Test', () => {
 
       div.innerHTML = renderResult.html;
       dom.window.document.body.appendChild(div);
-      console.log(dom.window.document.body.innerHTML)
 
       await resolvedComponent.hydrate(div, {name: 'Hello, World'});
 
-      console.log(dom.window.document.body.innerHTML)
       expect(div.textContent).toContain('Hello, World');
       expect(div.textContent).toContain('For a guide and recipes on how to configure / customize this project');
       expect(div.querySelector('[data-server-rendered]')).toBeNull();
@@ -106,6 +104,12 @@ describe('Compiler Integration Test', () => {
 
       const resolvedComponent = (window as any)['test_components_hello-world-state'].default;
       const div = dom.window.document.createElement('div');
+
+      const {default: compiledComponent} = require(compiler.compiledViewComponentPath('hello-world-state'));
+      const renderResult = await compiledComponent.render({name: 'World'});
+
+      div.innerHTML = renderResult.html;
+      dom.window.document.body.appendChild(div);
 
       await resolvedComponent.hydrate(div, {name: 'World'}, {msg: 'Hello, World'});
 

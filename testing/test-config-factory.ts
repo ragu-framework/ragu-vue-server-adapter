@@ -18,6 +18,7 @@ export const createTestConfig = async (): Promise<TestConfig> => {
   const config = createVueRaguServerConfig({
     projectRoot: __dirname,
     environment: 'development',
+    showReports: false,
     compiler: {
       assetsPrefix: ''
     },
