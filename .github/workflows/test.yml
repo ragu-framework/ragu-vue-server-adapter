@@ -30,6 +30,13 @@ jobs:
     - run: yarn test
       env:
         CI: true
+    - run: yarn add webpack@4
+      name: "Installing webpack 4 to make sure it is compatible"
+      env:
+        CI: true
+    - run: yarn test
+      env:
+        CI: true
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
