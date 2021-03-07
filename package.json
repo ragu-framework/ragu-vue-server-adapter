@@ -7,6 +7,9 @@
   "repository": "https://github.com/ragu-framework/ragu-vue-server-adapter",
   "author": "Maniero <carlosmaniero@gmail.com>",
   "license": "MIT",
+  "dependencies": {
+    "webpack-merge": "^5.7.3"
+  },
   "devDependencies": {
     "@babel/core": "~7.13.8",
     "@babel/plugin-proposal-class-properties": "~7.13.0",
@@ -62,7 +65,6 @@
     "webpack-cli": "~4.5.0",
     "webpack-dev-server": "~3.11.2",
     "webpack-hot-middleware": "~2.25.0",
-    "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^2.5.2"
   },
   "peerDependencies": {
@@ -99,7 +101,6 @@
     "webpack-cli": "~4.5.0",
     "webpack-dev-server": "~3.11.2",
     "webpack-hot-middleware": "~2.25.0",
-    "webpack-merge": "^5.7.3",
     "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
