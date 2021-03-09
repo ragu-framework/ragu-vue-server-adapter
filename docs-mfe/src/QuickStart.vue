@@ -51,13 +51,13 @@
         <div slot="description">
           <div class="info-text">
             <p>VueJs does not have a client yet 😢! It will come soon.</p>
-            <p>Do you think that could help to create? Take a look at this issue: <a href="https://github.com/ragu-framework/ragu/issues/11">https://github.com/ragu-framework/ragu/issues/11</a></p>
+            <p>Do you think that could help to create one? Take a look at this issue: <a href="https://github.com/ragu-framework/ragu/issues/11">https://github.com/ragu-framework/ragu/issues/11</a></p>
           </div>
 
-          <p>For while you can use the <mark>ragu-component</mark> custom element that works no matter with framework you are using.</p>
+          <p>Util it is not released you can use the <mark>ragu-component</mark> custom element client. It works no matter which framework you use.</p>
 
           <p>
-            For that, all you need to do is to give an <mark>src</mark> attribute to <mark>ragu-component</mark>.
+            All you need to do is to provide a <mark>src</mark> attribute to <mark>ragu-component</mark>.
             The same way you would do with an iframe.
           </p>
           <p>
@@ -75,7 +75,7 @@
           There are two ways of publishing your micro-frontend:
         </p>
         <p>
-          You can deploy as a simple <strong>static project</strong> to your favorite CDN or ir can use <strong>ragu
+          You can deploy it as a simple <strong>static project</strong> to your favorite CDN or use <strong>ragu
           server</strong> to publish your micro-frontends.
         </p>
       </div>
@@ -113,7 +113,7 @@
           <p>
             A json with the same name of your <mark>--file</mark> will be created at <mark>.ragu-components/</mark>.
           </p>
-          <p>You must use this json to fetch your micro-frontend using the ragu-client</p>
+          <p>You must use this json to fetch your micro-frontend using the ragu-client.</p>
           <p>⚠️ Don't forget the <mark>.json</mark> extension. That's how Ragu knows it is a static micro-frontend.</p>
         </div>
         <div slot="action">
