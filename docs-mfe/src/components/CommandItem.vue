@@ -34,6 +34,7 @@ export default {
     width: 100%;
     max-width: 100%;
     min-width: 100%;
+    box-sizing: border-box;
   }
 
   .description-wrapper {
@@ -49,6 +50,14 @@ export default {
       text-align: center;
       border-radius: 40px;
       margin-right: 16px;
+    }
+  }
+
+  @media (max-width: 960px) {
+    grid-template-columns: 100%;
+
+    .action {
+      padding-left: 52px;
     }
   }
 }
