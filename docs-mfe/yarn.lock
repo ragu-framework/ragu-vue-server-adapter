@@ -4477,6 +4477,11 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.4.x"
 
+html-parsed-element@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/html-parsed-element/-/html-parsed-element-0.4.0.tgz#4e88a278b3ec8a6e5070b3ebd6c4de087711c92a"
+  integrity sha512-8J1VJKT/wOUzmVeqzvf8/Qm35ofWLfWQRGCE8/2vsgMG1Y6p+1MMmiXOE8QAx/FXphYcmg6NXwZct82iee+UsA==
+
 html-tags@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-2.0.0.tgz#10b30a386085f43cede353cc8fa7cb0deeea668b"
@@ -6909,13 +6914,13 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
   integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
-ragu-cli@^0.0.30:
-  version "0.0.30"
-  resolved "https://registry.yarnpkg.com/ragu-cli/-/ragu-cli-0.0.30.tgz#f8ea9e5306fc9d0d7e1c3563d77720e3d56c983d"
-  integrity sha512-fewQyIaFL1wlgkc1UWzLzVHimaGAb0g6nzCTvhvTZCTVl47fDQ3bqm/lih6gU20X/WGUwNOzaO+jdN4NDsLXsA==
+ragu-cli@^0.0.42:
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/ragu-cli/-/ragu-cli-0.0.42.tgz#c24310ed10c66adff611fc00617eafe2338f3cf1"
+  integrity sha512-N2DZLOo0pee2qE5lbnezGstW4scbnC7ifCwMeTMM1yMjACGBn2QND9w+uRM6ZxIjwQNPr4LRwQzg3ny9sU7NNg==
   dependencies:
     commander "^7.1.0"
-    ragu-server "0.0.71"
+    ragu-server "^0.0.82"
     reflect-metadata "^0.1.13"
     tsyringe "^4.4.0"
 
@@ -6926,15 +6931,17 @@ ragu-client-node@^0.0.4:
   dependencies:
     yarn "^1.22.10"
 
-ragu-dom@0.0.70:
-  version "0.0.70"
-  resolved "https://registry.yarnpkg.com/ragu-dom/-/ragu-dom-0.0.70.tgz#f7dad1f39255ba5bff0b30648d4acba4473a2f55"
-  integrity sha512-CWylNJVvKc2D6Md5qrvimxe0nS93C4k7YxAG1QW+rISO6CS+FaD3Q/SogV8IRFvfO63ATidA/6IRXL2kRmVoKg==
+ragu-dom@^0.0.78:
+  version "0.0.78"
+  resolved "https://registry.yarnpkg.com/ragu-dom/-/ragu-dom-0.0.78.tgz#d42cc44e35d672cef603d41beee5a6997c04d510"
+  integrity sha512-hgt1OtOzTfg+rvulNEoRskJElHvNBjC/aAPARpdSMb3qZ+dx17S6+/5FGRi0mpT2AuRXBmH1EmB6peHkQnBnYA==
+  dependencies:
+    html-parsed-element "^0.4.0"
 
-ragu-server@0.0.71:
-  version "0.0.71"
-  resolved "https://registry.yarnpkg.com/ragu-server/-/ragu-server-0.0.71.tgz#5acc8fe99f0744aebdf7d5281f2308349d496206"
-  integrity sha512-NxzBGLqrghAhEskVK5kVO33Y/RV7uHohKQ0Ww7Rv4skS/7kbK6fweU0Q0hgwpuqzRBmVUr4B31OaVKc93rYAHQ==
+ragu-server@^0.0.82:
+  version "0.0.82"
+  resolved "https://registry.yarnpkg.com/ragu-server/-/ragu-server-0.0.82.tgz#62bb18feea7a41530e84751dd69004574ba85131"
+  integrity sha512-f5TtjlJYpqdkW4LEq7LrFyBsqHNtIP3HkHtK5PCkbowt/c//YPeBVDwTYgKghMeGWHAyoYIzYw03ezLvFgEm5g==
   dependencies:
     abort-controller "^3.0.0"
     chalk "^4.1.0"
@@ -6946,17 +6953,17 @@ ragu-server@0.0.71:
     is-plain-object "^5.0.0"
     npm-programmatic "^0.0.12"
     ragu-client-node "^0.0.4"
-    ragu-dom "0.0.70"
+    ragu-dom "^0.0.78"
     webpack-bundle-analyzer "^4.4.0"
     webpack-livereload-plugin "^3.0.0"
     webpack-merge "^5.1.4"
     webpack-node-externals "^2.5.2"
     yargs "^16.0.3"
 
-ragu-vue-server-adapter@^0.0.69:
-  version "0.0.69"
-  resolved "https://registry.yarnpkg.com/ragu-vue-server-adapter/-/ragu-vue-server-adapter-0.0.69.tgz#6daee90370042344f4bcc00bded670f6a2db2bb0"
-  integrity sha512-XquAWUGJTTJYTBb/KnWSIBLfTzm8i9PgDAG0pzHDSFfudKJxtI9sZMUY46VXmapWcBbHvMGrekl7cL/yzO9b6A==
+ragu-vue-server-adapter@^0.0.70:
+  version "0.0.70"
+  resolved "https://registry.yarnpkg.com/ragu-vue-server-adapter/-/ragu-vue-server-adapter-0.0.70.tgz#7d1c8d747be3ffa64120528f3066e0c13586b3ed"
+  integrity sha512-/OJZhF7qhMtYapz8lRAI2bOT4aFjTQr5ZY3DPzCnAV/MFA8TOAlmU8/o2+aNtNWKWGisE+h5u1y/11gDBw5OwQ==
   dependencies:
     webpack-merge "^5.7.3"
 

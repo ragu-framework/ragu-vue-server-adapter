@@ -201,8 +201,8 @@ const consumingStatic = `<ragu-component
 const actionExport = `import Vue from "vue";
 import HelloWorld from '../../src/HelloWorld';
 
-export default (props) => new Vue({
-render: h => h(HelloWorld, {props})
+export default ({params}) => new Vue({
+render: h => h(HelloWorld, {props: params})
 });
 `;
 

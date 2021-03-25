@@ -16,8 +16,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "prismjs": "^1.22.0",
-    "ragu-cli": "^0.0.30",
-    "ragu-vue-server-adapter": "^0.0.69",
+    "ragu-cli": "^0.0.42",
+    "ragu-vue-server-adapter": "^0.0.70",
     "sass": "^1.32.8",
     "sass-loader": "10.1.1",
     "vue": "^2.6.11",
