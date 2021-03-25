@@ -10,27 +10,27 @@ function getVueApp (component) {
 
 
 module.exports = (component) => ({
-  hydrate: function (el, props, state) {
-    el.app = getVueApp(component(props, state));
+  hydrate: function (element, params, state) {
+    element.app = getVueApp(component({...params, params, state, element, isServer: false}, state));
 
-    if (el.app.$mount) {
-      el.app.$mount(el.querySelector('[data-server-rendered]'));
+    if (element.app.$mount) {
+      element.app.$mount(element.querySelector('[data-server-rendered]'));
 
       return;
     }
 
-    el.app.mount(el.querySelector('[data-server-rendered]'));
+    element.app.mount(element.querySelector('[data-server-rendered]'));
   },
-  render: function (el, props, state) {
-    el.app = getVueApp(component(props, state));
+  render: function (element, params, state) {
+    element.app = getVueApp(component({...params, params, state, element, isServer: false}, state));
 
-    if (el.app.$mount) {
-      var renderedComponent = el.app.$mount();
-      el.appendChild(renderedComponent.$el);
+    if (element.app.$mount) {
+      var renderedComponent = element.app.$mount();
+      element.appendChild(renderedComponent.$el);
       return;
     }
 
-    el.app.mount(el);
+    element.app.mount(element);
   },
   disconnect: function (el) {
     el.app.$destroy(true);

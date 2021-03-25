@@ -22,9 +22,10 @@ function createToHTMLString() {
 module.exports = (component, stateResolver) => ({
   render: function (props) {
     var toHTMLString = createToHTMLString();
+    props = {...props, ...props.params};
 
     return stateResolver(props)
-      .then((state) => toHTMLString(component(props, state))
+      .then((state) => toHTMLString(component({...props, state}, state))
           .then((html) => ({html: html, state: state})))
   }
 })
